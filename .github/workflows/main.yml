@@ -1,0 +1,26 @@
+name: Python application test
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # Step 1: Check out your repo
+      - uses : actions/checkout@v2
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: |
+          make install
+      - name: lint with pylint
+        run: |
+          make lint
+      - name: test by pytest
+        run: |
+          make test
+      - name: format code with python black
+        run: |
+          make format
